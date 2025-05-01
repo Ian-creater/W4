@@ -1,0 +1,611 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Basics Tutorial</title>
+    <style>
+        /* CSS Styles */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --success-color: #2ecc71;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        nav {
+            background-color: var(--primary-color);
+            border-radius: 5px;
+            margin-bottom: 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav ul li {
+            flex: 1;
+            text-align: center;
+        }
+        
+        nav ul li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .active {
+            background-color: var(--secondary-color);
+            font-weight: bold;
+        }
+        
+        section {
+            background-color: white;
+            border-radius: 5px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: none;
+        }
+        
+        section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-top: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        pre {
+            background-color: var(--light-color);
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: var(--dark-color);
+        }
+        
+        .example {
+            background-color: var(--light-color);
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            border: 1px dashed var(--primary-color);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+        }
+        
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+        
+        .quiz-container {
+            margin-top: 1.5rem;
+        }
+        
+        .quiz-question {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: var(--light-color);
+            border-radius: 5px;
+        }
+        
+        .quiz-options {
+            margin-left: 1.5rem;
+        }
+        
+        .quiz-options label {
+            display: block;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .quiz-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .correct {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: var(--dark-color);
+            color: white;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>HTML Basics Tutorial</h1>
+        <p>Learn the fundamentals of HTML in simple steps</p>
+    </header>
+    
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="#" class="active" data-section="intro">Introduction</a></li>
+                <li><a href="#" data-section="structure">HTML Structure</a></li>
+                <li><a href="#" data-section="elements">Basic Elements</a></li>
+                <li><a href="#" data-section="attributes">Attributes</a></li>
+                <li><a href="#" data-section="lists">Lists</a></li>
+                <li><a href="#" data-section="quiz">Quiz</a></li>
+            </ul>
+        </nav>
+        
+        <section id="intro" class="active">
+            <h2>Introduction to HTML</h2>
+            <p>HTML (HyperText Markup Language) is the standard markup language for creating web pages. It describes the structure of a web page and consists of a series of elements that tell the browser how to display content.</p>
+            
+            <h3>What is HTML?</h3>
+            <ul>
+                <li>HTML stands for HyperText Markup Language</li>
+                <li>HTML is the standard markup language for creating Web pages</li>
+                <li>HTML describes the structure of a Web page</li>
+                <li>HTML consists of a series of elements</li>
+                <li>HTML elements tell the browser how to display the content</li>
+            </ul>
+            
+            <h3>How HTML Works</h3>
+            <p>HTML documents are plain text files that contain HTML elements. These elements are represented by tags that label pieces of content such as "heading", "paragraph", "table", and so on. Browsers read these files and render them into visible or audible web pages.</p>
+            
+            <div class="example">
+                <h4>Simple HTML Example:</h4>
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;My First Heading&lt;/h1&gt;
+    &lt;p&gt;My first paragraph.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+            
+            <a href="#" class="btn" data-section="structure">Next: HTML Structure →</a>
+        </section>
+        
+        <section id="structure">
+            <h2>HTML Document Structure</h2>
+            <p>Every HTML document has a basic structure that must be followed. This structure ensures that browsers can properly interpret and display the content.</p>
+            
+            <h3>Basic HTML Document Structure</h3>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Document Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Content goes here --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            
+            <h3>Key Components:</h3>
+            <ul>
+                <li><strong>&lt;!DOCTYPE html&gt;</strong> - Declares the document type and HTML version</li>
+                <li><strong>&lt;html&gt;</strong> - The root element of an HTML page</li>
+                <li><strong>&lt;head&gt;</strong> - Contains meta information about the document</li>
+                <li><strong>&lt;title&gt;</strong> - Specifies a title for the document</li>
+                <li><strong>&lt;body&gt;</strong> - Contains the visible page content</li>
+            </ul>
+            
+            <div class="example">
+                <h4>Live Example:</h4>
+                <p>This is what the basic structure looks like when rendered:</p>
+                <div style="border:1px solid #ccc; padding:10px;">
+                    <h1 style="margin:0;">Document Title</h1>
+                    <p>Content goes here...</p>
+                </div>
+            </div>
+            
+            <a href="#" class="btn" data-section="elements">Next: Basic Elements →</a>
+        </section>
+        
+        <section id="elements">
+            <h2>Basic HTML Elements</h2>
+            <p>HTML elements are the building blocks of HTML pages. Each element can have attributes and contains content between its opening and closing tags.</p>
+            
+            <h3>Common HTML Elements</h3>
+            
+            <h4>Headings</h4>
+            <p>HTML headings are defined with the &lt;h1&gt; to &lt;h6&gt; tags:</p>
+            <pre><code>&lt;h1&gt;This is heading 1&lt;/h1&gt;
+&lt;h2&gt;This is heading 2&lt;/h2&gt;
+&lt;h3&gt;This is heading 3&lt;/h3&gt;
+&lt;h4&gt;This is heading 4&lt;/h4&gt;
+&lt;h5&gt;This is heading 5&lt;/h5&gt;
+&lt;h6&gt;This is heading 6&lt;/h6&gt;</code></pre>
+            
+            <h4>Paragraphs</h4>
+            <p>The &lt;p&gt; tag defines a paragraph:</p>
+            <pre><code>&lt;p&gt;This is a paragraph.&lt;/p&gt;
+&lt;p&gt;This is another paragraph.&lt;/p&gt;</code></pre>
+            
+            <h4>Links</h4>
+            <p>The &lt;a&gt; tag defines a hyperlink:</p>
+            <pre><code>&lt;a href="https://www.example.com"&gt;This is a link&lt;/a&gt;</code></pre>
+            
+            <h4>Images</h4>
+            <p>The &lt;img&gt; tag defines an image (though we're not using images in this tutorial):</p>
+            <pre><code>&lt;img src="image.jpg" alt="Description of image"&gt;</code></pre>
+            
+            <h4>Line Breaks</h4>
+            <p>The &lt;br&gt; tag inserts a single line break:</p>
+            <pre><code>&lt;p&gt;This is&lt;br&gt;a line&lt;br&gt;break example.&lt;/p&gt;</code></pre>
+            
+            <a href="#" class="btn" data-section="attributes">Next: HTML Attributes →</a>
+        </section>
+        
+        <section id="attributes">
+            <h2>HTML Attributes</h2>
+            <p>Attributes provide additional information about HTML elements. They are always specified in the start tag and usually come in name/value pairs like: name="value".</p>
+            
+            <h3>Common Attributes</h3>
+            
+            <h4>The href Attribute</h4>
+            <p>The &lt;a&gt; tag defines a hyperlink. The href attribute specifies the URL of the page the link goes to:</p>
+            <pre><code>&lt;a href="https://www.example.com"&gt;Visit Example.com&lt;/a&gt;</code></pre>
+            
+            <h4>The src Attribute</h4>
+            <p>The &lt;img&gt; tag is used to embed an image. The src attribute specifies the path to the image:</p>
+            <pre><code>&lt;img src="picture.jpg"&gt;</code></pre>
+            
+            <h4>The alt Attribute</h4>
+            <p>The alt attribute provides alternative text for an image:</p>
+            <pre><code>&lt;img src="picture.jpg" alt="A beautiful landscape"&gt;</code></pre>
+            
+            <h4>The style Attribute</h4>
+            <p>The style attribute is used to add styles to an element, such as color, font, size, etc:</p>
+            <pre><code>&lt;p style="color:red;"&gt;This is a red paragraph.&lt;/p&gt;</code></pre>
+            
+            <h4>The class and id Attributes</h4>
+            <p>These attributes are used for styling and JavaScript:</p>
+            <pre><code>&lt;p class="intro" id="first-paragraph"&gt;This is an introduction.&lt;/p&gt;</code></pre>
+            
+            <div class="example">
+                <h4>Attribute Example:</h4>
+                <p style="color: blue; font-weight: bold;">This paragraph is styled with the style attribute.</p>
+                <p><a href="#" style="text-decoration: none; color: green;">This link has custom styling</a></p>
+            </div>
+            
+            <a href="#" class="btn" data-section="lists">Next: HTML Lists →</a>
+        </section>
+        
+        <section id="lists">
+            <h2>HTML Lists</h2>
+            <p>HTML lists allow web developers to group a set of related items in lists. There are three types of lists in HTML:</p>
+            
+            <h3>Unordered Lists</h3>
+            <p>An unordered list starts with the &lt;ul&gt; tag. Each list item starts with the &lt;li&gt; tag:</p>
+            <pre><code>&lt;ul&gt;
+    &lt;li&gt;Coffee&lt;/li&gt;
+    &lt;li&gt;Tea&lt;/li&gt;
+    &lt;li&gt;Milk&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+            
+            <div class="example">
+                <h4>Result:</h4>
+                <ul style="margin-left: 20px;">
+                    <li>Coffee</li>
+                    <li>Tea</li>
+                    <li>Milk</li>
+                </ul>
+            </div>
+            
+            <h3>Ordered Lists</h3>
+            <p>An ordered list starts with the &lt;ol&gt; tag. Each list item starts with the &lt;li&gt; tag:</p>
+            <pre><code>&lt;ol&gt;
+    &lt;li&gt;First item&lt;/li&gt;
+    &lt;li&gt;Second item&lt;/li&gt;
+    &lt;li&gt;Third item&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+            
+            <div class="example">
+                <h4>Result:</h4>
+                <ol style="margin-left: 20px;">
+                    <li>First item</li>
+                    <li>Second item</li>
+                    <li>Third item</li>
+                </ol>
+            </div>
+            
+            <h3>Description Lists</h3>
+            <p>A description list is a list of terms, with a description of each term:</p>
+            <pre><code>&lt;dl&gt;
+    &lt;dt&gt;Coffee&lt;/dt&gt;
+    &lt;dd&gt;- black hot drink&lt;/dd&gt;
+    &lt;dt&gt;Milk&lt;/dt&gt;
+    &lt;dd&gt;- white cold drink&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+            
+            <div class="example">
+                <h4>Result:</h4>
+                <dl style="margin-left: 20px;">
+                    <dt>Coffee</dt>
+                    <dd>- black hot drink</dd>
+                    <dt>Milk</dt>
+                    <dd>- white cold drink</dd>
+                </dl>
+            </div>
+            
+            <a href="#" class="btn" data-section="quiz">Test Your Knowledge →</a>
+        </section>
+        
+        <section id="quiz">
+            <h2>HTML Basics Quiz</h2>
+            <p>Test your understanding of HTML basics with this short quiz. Select the correct answers and check your results at the end.</p>
+            
+            <div class="quiz-container">
+                <form id="htmlQuiz">
+                    <div class="quiz-question">
+                        <h3>1. What does HTML stand for?</h3>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q1" value="a"> Hyperlinks and Text Markup Language</label>
+                            <label><input type="radio" name="q1" value="b"> Hyper Text Markup Language</label>
+                            <label><input type="radio" name="q1" value="c"> Home Tool Markup Language</label>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-question">
+                        <h3>2. What is the correct HTML element for the largest heading?</h3>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q2" value="a"> &lt;heading&gt;</label>
+                            <label><input type="radio" name="q2" value="b"> &lt;h6&gt;</label>
+                            <label><input type="radio" name="q2" value="c"> &lt;h1&gt;</label>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-question">
+                        <h3>3. What is the correct HTML for creating a hyperlink?</h3>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q3" value="a"> &lt;a url="http://www.example.com"&gt;Example&lt;/a&gt;</label>
+                            <label><input type="radio" name="q3" value="b"> &lt;a href="http://www.example.com"&gt;Example&lt;/a&gt;</label>
+                            <label><input type="radio" name="q3" value="c"> &lt;a&gt;http://www.example.com&lt;/a&gt;</label>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-question">
+                        <h3>4. Which HTML attribute specifies an alternate text for an image?</h3>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q4" value="a"> src</label>
+                            <label><input type="radio" name="q4" value="b"> alt</label>
+                            <label><input type="radio" name="q4" value="c"> title</label>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-question">
+                        <h3>5. Which HTML element defines the structure of an HTML document?</h3>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q5" value="a"> &lt;body&gt;</label>
+                            <label><input type="radio" name="q5" value="b"> &lt;html&gt;</label>
+                            <label><input type="radio" name="q5" value="c"> &lt;head&gt;</label>
+                        </div>
+                    </div>
+                    
+                    <button type="button" id="submitQuiz" class="btn btn-success">Submit Quiz</button>
+                </form>
+                
+                <div id="quizResult" class="quiz-result" style="display: none;">
+                    <h3>Your Results</h3>
+                    <p id="scoreText"></p>
+                    <p id="feedback"></p>
+                    <button type="button" id="retakeQuiz" class="btn">Retake Quiz</button>
+                </div>
+            </div>
+            
+            <a href="#" class="btn" data-section="intro">← Back to Beginning</a>
+        </section>
+    </div>
+    
+    <footer>
+        <p>&copy; 2023 HTML Basics Tutorial. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // JavaScript for the tutorial website
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation between sections
+            const navLinks = document.querySelectorAll('nav a, .btn[data-section]');
+            const sections = document.querySelectorAll('section');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Get the target section ID
+                    const targetSection = this.getAttribute('data-section');
+                    
+                    // Update active nav link
+                    document.querySelector('nav a.active').classList.remove('active');
+                    if (this.tagName === 'A') {
+                        this.classList.add('active');
+                    } else {
+                        // If it's a next/back button, find the corresponding nav link
+                        document.querySelector(`nav a[data-section="${targetSection}"]`).classList.add('active');
+                    }
+                    
+                    // Hide all sections
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Show target section
+                    document.getElementById(targetSection).classList.add('active');
+                });
+            });
+            
+            // Quiz functionality
+            const quizForm = document.getElementById('htmlQuiz');
+            const submitBtn = document.getElementById('submitQuiz');
+            const quizResult = document.getElementById('quizResult');
+            const scoreText = document.getElementById('scoreText');
+            const feedback = document.getElementById('feedback');
+            const retakeBtn = document.getElementById('retakeQuiz');
+            
+            const correctAnswers = {
+                q1: 'b',
+                q2: 'c',
+                q3: 'b',
+                q4: 'b',
+                q5: 'b'
+            };
+            
+            submitBtn.addEventListener('click', function() {
+                let score = 0;
+                const userAnswers = {};
+                
+                // Get user answers
+                for (let i = 1; i <= 5; i++) {
+                    const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+                    if (selectedOption) {
+                        userAnswers[`q${i}`] = selectedOption.value;
+                    }
+                }
+                
+                // Calculate score
+                for (const question in correctAnswers) {
+                    if (userAnswers[question] === correctAnswers[question]) {
+                        score++;
+                    }
+                }
+                
+                // Display results
+                const percentage = (score / 5) * 100;
+                scoreText.textContent = `You scored ${score} out of 5 (${percentage}%)`;
+                
+                if (percentage >= 80) {
+                    quizResult.className = 'quiz-result correct';
+                    feedback.textContent = 'Excellent! You have a strong understanding of HTML basics.';
+                } else if (percentage >= 50) {
+                    quizResult.className = 'quiz-result';
+                    feedback.textContent = 'Good job! You know some HTML basics but could use more practice.';
+                } else {
+                    quizResult.className = 'quiz-result incorrect';
+                    feedback.textContent = 'Keep practicing! Review the tutorial sections and try again.';
+                }
+                
+                quizResult.style.display = 'block';
+                quizForm.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            retakeBtn.addEventListener('click', function() {
+                // Reset the quiz
+                quizForm.reset();
+                quizResult.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
